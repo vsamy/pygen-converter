@@ -1,5 +1,5 @@
 import numpy
-from pygenTest import *
+from pygenTestLib import *
 import unittest
 
 #######################################

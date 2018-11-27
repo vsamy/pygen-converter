@@ -128,7 +128,7 @@ void bindEigen()
         .def("check", &RandomFixedSizeRowArray<T>::check);
 }
 
-BOOST_PYTHON_MODULE(pygenTest)
+BOOST_PYTHON_MODULE(pygenTestLib)
 {
     Py_Initialize();
     np::initialize();
