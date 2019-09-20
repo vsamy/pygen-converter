@@ -39,7 +39,7 @@ bool RandomFixedSizeMatrix<T>::check(const EigenType& mat)
 
 template <typename T>
 RandomHalfDynamicSizeMatrix<T>::RandomHalfDynamicSizeMatrix(Eigen::Index col)
-    : mat_(EigenType::Random(2, col))
+    : mat_(EigenType::Random(4, col))
 {
 }
 
@@ -171,7 +171,7 @@ bool RandomFixedSizeArray<T>::check(const EigenType& mat)
 
 template <typename T>
 RandomHalfDynamicSizeArray<T>::RandomHalfDynamicSizeArray(Eigen::Index col)
-    : mat_(EigenType::Random(2, col))
+    : mat_(EigenType::Random(4, col))
 {
 }
 
@@ -257,7 +257,7 @@ typename RandomFixedSizeRowArray<T>::EigenType RandomFixedSizeRowArray<T>::get()
 }
 
 template <typename T>
-bool RandomFixedSizeRowArray<T>::check(const EigenType& vec)
+bool RandomFixedSizeRowArray<T>::check(EigenType vec)
 {
     return vec_.isApprox(vec);
 }

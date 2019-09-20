@@ -9,11 +9,18 @@ set(SRC
     bindings.cpp
 )
 
-include_directories(${Boost_INCLUDE_DIRS})
-include_directories(${PYTHON_INCLUDE_DIRS})
+set(Boost_USE_STATIC_LIBS ON)
+find_package(Python REQUIRED COMPONENTS Development)
+find_package(Boost REQUIRED COMPONENTS python${Python_VERSION_MAJOR}${Python_VERSION_MINOR} numpy)
 
 add_library(${target} SHARED ${HEADERS} ${SRC})
-target_link_libraries(${target} ${PROJECT_NAME} ${PYTHON_LIBRARY} ${Boost_PYTHON_LIBRARIES})
+target_compile_definitions(${target} PUBLIC -DBOOST_PYTHON_STATIC_LIB -DBOOST_NUMPY_STATIC_LIB)
+target_link_libraries(${target} PUBLIC Python::Python Boost::python${Python_VERSION_MAJOR}${Python_VERSION_MINOR} Boost::numpy)
+if(TARGET Eigen3::Eigen) 
+  target_link_libraries(${target} PUBLIC Eigen3::Eigen) 
+else() 
+  target_include_directories(${target} SYSTEM PUBLIC "${EIGEN3_INCLUDE_DIR}") 
+endif() 
 
 if(WIN32)
     set_target_properties(${target} PROPERTIES SUFFIX ".pyd")
@@ -25,4 +32,4 @@ install(TARGETS ${target}
     RUNTIME DESTINATION ${PYTHON_INSTALL_PATH}/${target}
 )
 
-PYTHON_INSTALL_BUILD(${target} __init__.py "${PYTHON_INSTALL_PATH}")
+install(FILES __init__.py DESTINATION "${PYTHON_INSTALL_PATH}/__init__.py")

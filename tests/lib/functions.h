@@ -249,7 +249,7 @@ public:
     RandomFixedSizeRowArray();
 
     EigenType get();
-    bool check(const EigenType& vec);
+    bool check(EigenType vec);
 
 private:
     EigenType vec_;
