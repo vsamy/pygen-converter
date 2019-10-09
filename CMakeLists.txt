@@ -1,6 +1,7 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.12.4)
 
 include(cmake/base.cmake)
+include(cmake/msvc-specific.cmake)
 
 set(PROJECT_NAME pygen)
 set(PROJECT_DESCRIPTION "This is an header only library that provides list to eigen and numpy to eigen converters for boost python.")
